@@ -2,18 +2,24 @@ package Fun;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 
 	
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements ActionListener {
 	
 	final int MENU = 0;
 	final int GAME = 1;
 	final int END = 2;
 	int currentState = MENU;
+	
+	Timer frameDraw;
 	
 	Font titleFont;
 	Font menuFont;
@@ -21,6 +27,10 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		menuFont = new Font("Arial", Font.PLAIN, 24);
+		
+		Timer frameDraw = new Timer(1000/60,this);
+		frameDraw.start();
+		
 	}
 	
 	@Override
@@ -72,6 +82,21 @@ public class GamePanel extends JPanel {
 		 g.drawString("YOU WERE KILLED", 120, 350);
 		 g.drawString("Press ENTER to restart", 100, 600);
 		 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(currentState == MENU){
+		    updateMenuState();
+		}else if(currentState == GAME){
+		    updateGameState();
+		}else if(currentState == END){
+		    updateEndState();
+		}
+		
+		System.out.println("action");
+		repaint();
 	}
 }
 
