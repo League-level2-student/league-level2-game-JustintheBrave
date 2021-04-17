@@ -81,8 +81,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("LEAGUE NINJA", 220, 100);
 		 
 		g.setFont(menuFont);
-		 g.drawString("YOU WERE KILLED", 120, 350);
-		 g.drawString("Press ENTER to restart", 100, 600);
+		 g.drawString("YOU LOST", 330, 170);
+		 g.drawString("Press ENTER to restart", 270, 330);
 		 
 	}
 
@@ -97,7 +97,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		    updateEndState();
 		}
 		
-		System.out.println("action");
 		repaint();
 	}
 
