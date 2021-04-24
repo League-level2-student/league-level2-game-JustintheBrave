@@ -26,11 +26,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font menuFont;
 	
+	Fruit fruit = new Fruit(400,250,50,50);
+	
 	public GamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		menuFont = new Font("Arial", Font.PLAIN, 24);
 		
-		Timer frameDraw = new Timer(1000/60,this);
+		Timer frameDraw = new Timer(1000/30,this);
 		frameDraw.start();
 		
 	}
@@ -71,6 +73,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void drawGameState(Graphics g) {  
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, Runner.WIDTH, Runner.HEIGHT);
+		
+		fruit.draw(g);
 	}
 	public void drawEndState(Graphics g)  {  
 		g.setColor(Color.CYAN);

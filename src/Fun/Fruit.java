@@ -6,17 +6,10 @@ import java.util.Random;
 
 public class Fruit extends GameObject{
 
-	int width;
-	int height;
-	int x;
-	int y;
-	int speed;
-	
-	
-	public Fruit(int locx, int locy,int sizex,int sizey) {
-		super(locx, locy, sizex, sizey);
+	public Fruit(int x,int y,int width,int height) {
+		super(x,y,width,height);
 		
-		speed=1;
+		speed=10;
 	}
 	 
 	public void update() {
