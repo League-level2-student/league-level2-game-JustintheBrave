@@ -26,7 +26,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font menuFont;
 	
-	Fruit fruit = new Fruit(400,250,50,50);
+	Fruit fruit = new Fruit(50,250,10,50);
+	Fruit paddle = new Fruit(750, 250, 10, 50);
 	
 	public GamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
@@ -52,7 +53,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	}
 	public void updateGameState() { 
-	 
+	 paddle.update();
+	 fruit.update();
 	}
 	public void updateEndState()  {  
 		 
@@ -64,7 +66,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		g.setFont(titleFont);
 		g.setColor(Color.WHITE);
-		g.drawString("LEAGUE NINJA", 220, 100);
+		g.drawString("LEAGUE PONG", 220, 100);
 		 
 		g.setFont(menuFont);
 		g.drawString("Press ENTER to begin", 250, 250);
@@ -75,6 +77,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, Runner.WIDTH, Runner.HEIGHT);
 		
 		fruit.draw(g);
+		paddle.draw(g);
 	}
 	public void drawEndState(Graphics g)  {  
 		g.setColor(Color.CYAN);
@@ -82,7 +85,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		g.setFont(titleFont);
 		g.setColor(Color.GRAY);
-		g.drawString("LEAGUE NINJA", 220, 100);
+		g.drawString("LEAGUE PONG", 220, 100);
 		 
 		g.setFont(menuFont);
 		 g.drawString("YOU LOST", 330, 170);
@@ -120,12 +123,60 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		        currentState++;
 		    }
 		}   
+		
+		if (e.getKeyCode()==KeyEvent.VK_UP) {
+			  if(currentState==GAME) {
+				  if(paddle.y>=10)
+				  	paddle.up=true;
+		}
+	}
+		
+		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
+			  if(currentState==GAME) {
+				  if(paddle.y<=420)
+					  paddle.down=true;
+		}
+	}if (e.getKeyCode()==KeyEvent.VK_W) {
+		  if(currentState==GAME) {
+			  if(fruit.y>=10)
+			  	fruit.up=true;
+	}
+}
+	
+	if (e.getKeyCode()==KeyEvent.VK_S) {
+		  if(currentState==GAME) {
+			  if(fruit.y<=420)
+			  	fruit.down=true;
+	}
+}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		if (e.getKeyCode()==KeyEvent.VK_UP) {
+			if(currentState==GAME) {
+				paddle.up=false;
+		}
 	}
+		
+	if (e.getKeyCode()==KeyEvent.VK_DOWN) {
+		if(currentState==GAME) {
+			paddle.down=false;
+	}
+}
+	
+	if (e.getKeyCode()==KeyEvent.VK_W) {
+		if(currentState==GAME) {
+			fruit.up=false;
+	}
+}
+	
+	if (e.getKeyCode()==KeyEvent.VK_S) {
+		if(currentState==GAME) {
+			fruit.down=false;
+	}
+}
+}
 }
 
