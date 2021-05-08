@@ -22,6 +22,8 @@ public class Fruit extends GameObject{
 		if (down) {
 			y+=speed;
 		}
+		
+		super.update();
 	}
 	
 	void draw(Graphics g) {

@@ -28,6 +28,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	
 	Fruit fruit = new Fruit(50,250,10,50);
 	Fruit paddle = new Fruit(750, 250, 10, 50);
+	Ball ball = new Ball(400,250,10,10);
 	
 	public GamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
@@ -55,6 +56,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void updateGameState() { 
 	 paddle.update();
 	 fruit.update();
+	 ball.update();
+	 ball.checkCollision(paddle);
+	 ball.checkCollision(fruit);
+	 
+	 if(ball.x>=800 || ball.x<=0) {
+			currentState=END;
+			ball.x=400;
+			ball.y=250;
+			ball.speedy=5;
+			ball.speedx=5;
+		}
 	}
 	public void updateEndState()  {  
 		 
@@ -78,6 +90,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		fruit.draw(g);
 		paddle.draw(g);
+		ball.draw(g);
+		
 	}
 	public void drawEndState(Graphics g)  {  
 		g.setColor(Color.CYAN);
@@ -88,8 +102,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("LEAGUE PONG", 220, 100);
 		 
 		g.setFont(menuFont);
-		 g.drawString("YOU LOST", 330, 170);
-		 g.drawString("Press ENTER to restart", 270, 330);
+		g.drawString("YOU WON", 340, 170);
+		g.drawString("Press ENTER to restart", 270, 330);
 		 
 	}
 
@@ -100,8 +114,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		    updateMenuState();
 		}else if(currentState == GAME){
 		    updateGameState();
-		}else if(currentState == END){
-		    updateEndState();
+		}else if(currentState == END) {
+			updateEndState();
 		}
 		
 		repaint();

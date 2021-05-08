@@ -5,16 +5,35 @@ import java.awt.Graphics;
 
 public class Ball extends GameObject{
 	
-	int speed;
+	int speedx;
+	int speedy;
 	
 	public Ball(int x, int y, int width, int height) {
 		super(x,y,width,height);
 		
-		speed=5;
+		speedx=5;
+		speedy=5;
 	}
 	
 	public void update() {
+		x+=speedx;
+		y+=speedy;
 		
+		if(y>=470) {
+			speedy *= -1;
+		}
+		
+		if(y<=0) {
+			speedy *= -1;
+		}
+		
+		super.update();
+	}
+	
+	public void checkCollision(GameObject p) {
+		if(collisionBox.intersects(p.collisionBox)) {
+			speedx = speedx*-1;
+		}
 	}
 	
 	void draw(Graphics g) {
