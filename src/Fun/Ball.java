@@ -33,6 +33,8 @@ public class Ball extends GameObject{
 	public void checkCollision(GameObject p) {
 		if(collisionBox.intersects(p.collisionBox)) {
 			speedx = speedx*-1;
+			GamePanel.score++;
+			System.out.println(GamePanel.score + "");
 		}
 	}
 	

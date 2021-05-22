@@ -29,6 +29,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Fruit fruit = new Fruit(50,250,10,50);
 	Fruit paddle = new Fruit(750, 250, 10, 50);
 	Ball ball = new Ball(400,250,10,10);
+	Ball ball2 = new Ball(400,250, 10, 10);
+
+	static int score = 0;
 	
 	public GamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
@@ -67,7 +70,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			ball.y=250;
 			ball.speedy=5;
 			ball.speedx=5;
+			paddle.y=250;
+			fruit.y=250;
 		}
+	
 	}
 	public void updateEndState()  {  
 		 
@@ -131,7 +137,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getKeyChar());
+		
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 		    if (currentState == END) {
 		        currentState = MENU;
@@ -170,7 +176,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("released");
+		
 		if (e.getKeyCode()==KeyEvent.VK_UP) {
 			if(currentState==GAME) {
 				paddle.up=false;
