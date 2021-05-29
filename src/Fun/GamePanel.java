@@ -29,9 +29,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Fruit fruit = new Fruit(50,250,10,50);
 	Fruit paddle = new Fruit(750, 250, 10, 50);
 	Ball ball = new Ball(400,250,10,10);
-	Ball ball2 = new Ball(400,250, 10, 10);
 
 	static int score = 0;
+	static int score2 = 0;
+	
 	
 	public GamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
@@ -72,7 +73,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			ball.speedx=5;
 			paddle.y=250;
 			fruit.y=250;
+			score=0;
 		}
+	 if(score2>=4) {
+			ball.speedx*=2;
+			ball.speedy*=2;
+			
+			score2=0;
+	 }
 	
 	}
 	public void updateEndState()  {  
@@ -94,6 +102,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void drawGameState(Graphics g) {  
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, Runner.WIDTH, Runner.HEIGHT);
+		
+		g.setFont(menuFont);
+		g.setColor(Color.WHITE);
+		g.drawString(score + "", 395, 50);
 		
 		fruit.draw(g);
 		paddle.draw(g);
