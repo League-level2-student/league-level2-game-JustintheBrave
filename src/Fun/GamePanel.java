@@ -19,12 +19,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int MENU = 0;
 	final int GAME = 1;
 	final int END = 2;
+	final int INS = 3;
 	int currentState = MENU;
 	
 	Timer frameDraw;
 	
 	Font titleFont;
 	Font menuFont;
+	Font textFont;
 	
 	Fruit fruit = new Fruit(50,250,10,50);
 	Fruit paddle = new Fruit(750, 250, 10, 50);
@@ -37,6 +39,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public GamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		menuFont = new Font("Arial", Font.PLAIN, 24);
+		textFont = new Font ("Arial", Font.PLAIN, 12);
 		
 		Timer frameDraw = new Timer(1000/30,this);
 		frameDraw.start();
@@ -51,6 +54,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		    drawGameState(g);
 		}else if(currentState == END){
 		    drawEndState(g);
+		}else if (currentState == INS) {
+			drawInstructionState(g);
 		}
 	}
 	
@@ -125,6 +130,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Press ENTER to restart", 270, 330);
 		 
 	}
+	
+	public void drawInstructionState (Graphics g) {
+		g.setColor(Color.black);
+		g.fillRect(0, 0, Runner.WIDTH, Runner.HEIGHT);
+		
+		g.setFont(titleFont);
+		g.setColor(Color.GRAY);
+		g.drawString("INSTRUCTIONS", 210, 100);
+		 
+		g.setFont(menuFont);
+		g.drawString("Use W and S to control the left paddle and the up and down arrow keys to", 0, 150);
+		g.drawString("control the right paddle", 0, 190);
+		
+		g.setFont(menuFont);
+		g.drawString("Press SPACE to go back to menu", 200, 400);
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -156,7 +177,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		    } else {
 		        currentState++;
 		    }
-		}   
+		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_SPACE) {
+			if(currentState==MENU) {
+				currentState = INS;
+			}
+			else {
+				currentState=MENU;
+			}
+		}
 		
 		if (e.getKeyCode()==KeyEvent.VK_UP) {
 			  if(currentState==GAME) {
